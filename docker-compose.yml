@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  learnmediator:
+    image: ${DOCKER_REGISTRY-}learnmediator
+    ports:
+      - 8081:80
+    build:
+      context: .
+      dockerfile: LearnMediator/Dockerfile
+  pgdb:
+    image: postgres:14.2-bullseye
+    ports:
+      - 5432:5432
+    volumes:
+      - customer-pg-data:/var/lib/postgresql
+    environment:
+      POSTGRES_PASSWORD: tataratira
+
+volumes:
+  customer-pg-data:
